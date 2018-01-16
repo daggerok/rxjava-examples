@@ -1,2 +1,4 @@
 rootProject.name = "rxjava-examples"
 include "stock"
+include "starter"
+include "javaee-starter"

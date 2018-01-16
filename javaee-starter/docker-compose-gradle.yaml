@@ -1,0 +1,21 @@
+version: "2.1"
+
+services:
+
+  gradle:
+    build:
+      context: .
+      dockerfile: gradle/Dockerfile
+    volumes: ["gradle-data:/home/app"]
+    ports:
+    - "5005:5005"
+    - "8080:8080"
+    - "9990:9990"
+    networks: [backing-services]
+
+volumes:
+  gradle-data: {}
+
+networks:
+  backing-services:
+    driver: bridge

@@ -1,0 +1,27 @@
+plugins {
+  id "war"
+  id "com.avast.gradle.docker-compose" version "0.6.12"
+}
+
+war {
+  archiveName = "${project.name}.war"
+}
+
+dependencies {
+  providedCompile "javax:javaee-api:8.0"
+  compile "javax.json:javax.json-api:1.0"
+  compile "org.glassfish:javax.json:1.0.4"
+}
+
+dockerCompose {
+  useComposeFiles = [project.file("docker-compose-gradle.yaml")]
+  captureContainersOutput = true
+  stopContainers = true
+  removeContainers = true
+  removeImages = "Local"
+  removeVolumes = true
+  removeOrphans = true
+  projectName = project.name
+}
+
+composeUp.dependsOn assemble

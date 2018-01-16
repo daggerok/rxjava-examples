@@ -11,6 +11,8 @@
 
   <modules>
     <module>stock</module>
+    <module>starter</module>
+    <module>javaee-starter</module>
   </modules>
 
   <properties>

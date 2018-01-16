@@ -1,0 +1,10 @@
+= rxjava-examples image:https://travis-ci.org/daggerok/rxjava-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/rxjava-examples"]
+
+.build
+----
+./mvnw -pl javaee-starter clean package com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:up
+./mvnw -pl javaee-starter com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down
+
+./gradlew clean build :javaee-starter:composeUp
+./gradlew :javaee-starter:composeDown
+----
