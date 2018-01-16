@@ -1,0 +1,8 @@
+= rxjava-examples
+image:https://travis-ci.org/daggerok/rxjava-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/rxjava-examples"]
+
+.
+----
+./mvnw
+./gradlew
+----
