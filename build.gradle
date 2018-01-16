@@ -1,0 +1,21 @@
+allprojects {
+
+  group = "daggerok"
+  version = "0.0.1"
+
+  apply plugin: "base"
+
+  defaultTasks "clean", "build"
+}
+
+subprojects {
+
+  apply plugin: "java"
+  apply plugin: "maven"
+
+  sourceCompatibility = targetCompatibility = 1.8
+
+  repositories {
+    mavenCentral()
+  }
+}
