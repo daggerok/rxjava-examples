@@ -1,12 +1,25 @@
+env:
+  global:
+    TERM=dumb
 language: java
 jdk:
 - oraclejdk8
 - openjdk8
 install: true
 before_script:
+- sudo apt udate -y || true
+- sudo apt install curl -y || true
+- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 script:
 - bash ./mvnw
 - bash ./gradlew
+- >
+  for project in \
+    stock \
+  ; do
+    java -jar ${project}/target/*-all.jar
+    java -jar ${project}/build/libs/*-all.jar
+  done;
 cache:
   directories:
   - $HOME/.m2

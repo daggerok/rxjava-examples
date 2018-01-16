@@ -1,8 +1,14 @@
-= rxjava-examples
-image:https://travis-ci.org/daggerok/rxjava-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/rxjava-examples"]
+= rxjava-examples image:https://travis-ci.org/daggerok/rxjava-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/rxjava-examples"]
 
-.
+projects
+
+. stock (rxjava reactive getting stated)
+
+.build
 ----
-./mvnw
-./gradlew
+./mvnw; ./gradlew
 ----
+
+inks:
+
+. link:https://www.youtube.com/watch?v=Bs76JDSx1X4[talk]
