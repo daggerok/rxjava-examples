@@ -5,4 +5,3 @@ plugins {
 
 mainClassName = "daggerok.App"
 shadowJar.mustRunAfter jar
-jar.enabled = false

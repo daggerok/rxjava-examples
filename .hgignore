@@ -1,11 +1,13 @@
-.git
-.gradle
-out
-build
-target
-.idea
+syntax: regexp
+.gradle/*
+.idea/*
+syntax: glob
+.git/*
+*/out/*
+*/build/*
+*/target/*
+.DS_Store
 *.iml
 *.ipr
 *.iws
 *.log
-.DS_Store

@@ -21,7 +21,7 @@
         <version>3.1.0</version>
 
         <configuration>
-          <finalName>${artifactId}-${version}-all</finalName>
+          <finalName>${project.artifactId}-${project.version}-all</finalName>
 
           <appendAssemblyId>false</appendAssemblyId>
 
