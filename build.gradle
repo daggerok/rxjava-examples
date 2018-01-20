@@ -1,6 +1,6 @@
 buildscript {
   ext {
-    rxjavaVersion = "1.2.0"
+    rxjavaVersion = "2.1.8"
     lombokVersion = "1.16.18"
     slf4jVersion = "1.7.25"
   }
@@ -29,7 +29,7 @@ subprojects {
   }
 
   dependencies {
-    compile "io.reactivex:rxjava:$rxjavaVersion"
+    compile "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     // compile "org.slf4j:slf4j-jdk14:$slf4jVersion"
     compile "org.slf4j:jul-to-slf4j:$slf4jVersion"
