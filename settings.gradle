@@ -3,4 +3,5 @@ include 'stock'
 include 'starter'
 include 'javaee-starter'
 include 'reactivex-api'
+include 'rxkotlin-example'
 enableFeaturePreview('STABLE_PUBLISHING')

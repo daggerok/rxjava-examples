@@ -33,6 +33,7 @@ include::../README.adoc[tags=content]
 
 == Implementation
 
+include::../rxkotlin-example/README.adoc[tags=content]
 include::../reactivex-api/README.adoc[tags=content]
 include::../javaee-starter/README.adoc[tags=content]
 include::../starter/README.adoc[tags=content]

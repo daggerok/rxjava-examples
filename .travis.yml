@@ -29,6 +29,7 @@ script:
 
 - |
   for project in \
+    rxkotlin-example \
     reactivex-api \
     stock \
     starter \

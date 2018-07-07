@@ -29,6 +29,7 @@
     <module>starter</module>
     <module>javaee-starter</module>
     <module>reactivex-api</module>
+    <module>rxkotlin-example</module>
   </modules>
 
   <dependencies>

@@ -1,8 +1,8 @@
-.hg
-.gradle
-out
-build
-target
+.hg/
+.gradle/
+out/
+build/
+target/
 .idea
 *.iml
 *.ipr
