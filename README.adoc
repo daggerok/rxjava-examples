@@ -1,5 +1,7 @@
 = rxjava-examples image:https://travis-ci.org/daggerok/rxjava-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/rxjava-examples"]
 
+//tag::content[]
+
 projects
 
 . stock (rxjava reactive getting stated)
@@ -12,3 +14,5 @@ projects
 inks:
 
 . link:https://www.youtube.com/watch?v=Bs76JDSx1X4[talk]
+
+//end::content[]
