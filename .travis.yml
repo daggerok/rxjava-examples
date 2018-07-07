@@ -24,8 +24,6 @@ before_script:
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 
 script:
-- export root=$(pwd)
-
 - ./mvnw
 - ./gradlew
 
