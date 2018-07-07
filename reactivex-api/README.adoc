@@ -6,7 +6,12 @@
 //Read link:https://daggerok.github.io/reactivex-api[project reference documentation]
 
 .build
-[source,bash]
+[source,java]
+----
+include::./src/main/java/daggerok/App.java[tags=content]
+----
+
+.api
 ----
 ObservableTest
 ObserversTest
