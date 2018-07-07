@@ -29,25 +29,25 @@ script:
 - ./mvnw
 - ./gradlew
 
-# reactivex-api
-- cd ${root}/reactivex-api
+- |
+  for project in \
+    reactivex-api \
+    stock \
+    starter \
+  ; do
+    java -jar ${project}/target/*-all.jar
+    java -jar ${project}/build/libs/*-all.jar
+  done;
 
-#- |
-#  for project in \
-#    stock \
-#    starter \
-#  ; do
-#    java -jar ${project}/target/*-all.jar
-#    java -jar ${project}/build/libs/*-all.jar
-#  done;
-#- ./mvnw -pl javaee-starter clean package com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:up
-#- sleep 30
-#- http :8080/javaee-starter/
-#- ./mvnw -pl javaee-starter com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down
-#- ./gradlew clean build :javaee-starter:composeUp
-#- sleep 2
-#- http :8080/javaee-starter/
-#- ./gradlew :javaee-starter:composeDown
+- ./mvnw -pl javaee-starter clean package com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:up
+- sleep 30
+- http :8080/javaee-starter/
+- ./mvnw -pl javaee-starter com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down
+
+- ./gradlew clean build :javaee-starter:composeUp
+- sleep 2
+- http :8080/javaee-starter/
+- ./gradlew :javaee-starter:composeDown
 
 before_deploy: ./mvnw -Pdocs
 
