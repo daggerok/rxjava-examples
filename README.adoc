@@ -2,6 +2,8 @@
 
 //tag::content[]
 
+Read link:https://daggerok.github.io/rxjava-examples[project reference documentation]
+
 projects
 
 . stock (rxjava reactive getting stated)
