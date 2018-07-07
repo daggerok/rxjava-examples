@@ -1,20 +1,34 @@
 env:
   global:
-    TERM=dumb
+  - TERM=dumb
+  - secure: U3F1ZSYFL8hzB6HVhN+1PG9mzFlTfOJQGY9A+2ZzLXQDKTXLC9OZwpOT/E2MbXAMuNV6TDTULpEob/AokQxzLcrfCt9VVtMBplgtkCI8GLctBSP62KmGS6U9iNsis0if7TRZoNozfdzjsfZLM2vefiKa2gAZ8DF0WSshMJpcX6osVU6oA0z7+07dqBKXEFwP/laoFh0456ioLMaVCquZycT+lwnKbjjEwt7QYnJwMsChzUCqVVJx6l677x1JkYtW7WhcckZj9zahS0vJZI++XS+Wo0NfBJGM4C45nwWcWQriyjixxLrf6z3GlaRTfQMOAFLXRSYRiGOBfdl/gfkUshOClqE+UJFdHK3tdTryS4/n2WB9y5phzv52DioDRylBJyEogUS9CPFoSYq1Dh2VttuebJmncWEkx/CM/Xt/+R5HecLB+PvsBZzOE10Faz1YIWe6tPjkR0TcJL1iAj/QCdRJzsxOlYtfUaOkROKUbOcgtzvYTdUJmy5HcDP+3qhk/aK/wfVlMdqSZmuilHJUchME9QIAhQX7sMhzd3KGvFIuF4QhPM+t4TMPZNYJaoVNpqRBBxHR6aGfrek89rFYf8qmrbiJll/iWMZcsUy+XI2+UQW73jy2eUmoeduY7OR5KpniphXw+M+KTP9tiZUqZ7h4tKbQ/RTbWqRsQpxZsGM=
+
 language: java
-jdk:
-- oraclejdk8
-- openjdk8
+jdk: oraclejdk8
+
+addons:
+  apt:
+    update: true
+    packages:
+    - sudo
+    - lsof
+    - bash
+    - curl
+    - jq
+    - libxml2-utils
+    - python-pip
+
 install: true
 before_script:
 - sudo apt udate -y || true
 - sudo apt install -y curl jq python-pip || true
 - sudo pip install httpie || true
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+
 script:
 - bash ./mvnw
 - bash ./gradlew
-- >
+- |
   for project in \
     stock \
     starter \
@@ -22,18 +36,36 @@ script:
     java -jar ${project}/target/*-all.jar
     java -jar ${project}/build/libs/*-all.jar
   done;
-# maven
 - bash ./mvnw -pl javaee-starter clean package com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:up
 - sleep 30
 - http :8080/javaee-starter/
 - bash ./mvnw -pl javaee-starter com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down
-# gradlew
 - bash ./gradlew clean build :javaee-starter:composeUp
 - sleep 2
 - http :8080/javaee-starter/
 - bash ./gradlew :javaee-starter:composeDown
 
+before_deploy:
+./mvnw -Pdocs documentation
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  # travis encrypt GITHUB_TOKEN=<your github repo token> --add
+  github-token: "$GITHUB_TOKEN"
+  keep-history: true
+  on:
+    branch: master
+  local-dir: target/generated-docs
+  target_branch: gh-pages
+
+before_cache:
+- sudo rm -rf $HOME/.gradle/caches/*/fileHashes/fileHashes.bin
+- sudo rm -rf $HOME/.gradle/caches/*/fileHashes/fileHashes.lock
+- sudo rm -rf $HOME/.gradle/caches/modules-2/modules-2.lock
+
 cache:
   directories:
   - $HOME/.m2
   - $HOME/.gradle
+  - $HOME/.docker

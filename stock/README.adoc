@@ -1,7 +1,7 @@
 
 //tag::content[]
 
-=== javaee-starter
+=== stock
 
 .build
 ----
