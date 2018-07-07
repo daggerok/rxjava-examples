@@ -4,7 +4,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>rxjava-examples (0.0.2)</title>
-<date>2018-07-07 20:51:14 UTC</date>
+<date>2018-07-07 21:07:08 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -16,7 +16,7 @@
 <revhistory>
 <revision>
 <revnumber>0.0.2</revnumber>
-<date>2018-07-07 20:51:14 UTC</date>
+<date>2018-07-07 21:07:08 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -61,19 +61,19 @@
 <para>
 <programlisting language="kotlin" linenumbering="unnumbered">package daggerok
 
-//import io.reactivex.rxkotlin.subscribeBy
-//import io.reactivex.rxkotlin.toObservable
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.rxkotlin.toObservable
 
 fun main(args: Array&lt;String&gt;) {
-//  val list = listOf("Alpha", "Beta", "Gamma", "Delta", "Epsilon")
-//
-//  list.toObservable() // extension function for Iterables
-//      .filter { it.length &gt;= 5 }
-//      .subscribeBy(  // named arguments for lambda Subscribers
-//          onNext = { println(it) },
-//          onError = { it.printStackTrace() },
-//          onComplete = { println("Done!") }
-//      )
+  val list = listOf("Alpha", "Beta", "Gamma", "Delta", "Epsilon")
+
+  list.toObservable() // extension function for Iterables
+      .filter { it.length &gt;= 5 }
+      .subscribeBy(  // named arguments for lambda Subscribers
+          onNext = { println(it) },
+          onError = { it.printStackTrace() },
+          onComplete = { println("Done!") }
+      )
 }</programlisting>
 </para>
 </formalpara>
