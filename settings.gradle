@@ -1,4 +1,6 @@
-rootProject.name = "rxjava-examples"
-include "stock"
-include "starter"
-include "javaee-starter"
+rootProject.name = 'rxjava-examples'
+include 'stock'
+include 'starter'
+include 'javaee-starter'
+include 'reactivex-api'
+enableFeaturePreview('STABLE_PUBLISHING')

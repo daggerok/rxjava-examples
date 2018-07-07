@@ -39,3 +39,8 @@ subprojects {
     testCompileOnly "org.projectlombok:lombok:$lombokVersion"
   }
 }
+
+wrapper {
+  gradleVersion = '4.8.1'
+  distributionType = 'BIN'
+}

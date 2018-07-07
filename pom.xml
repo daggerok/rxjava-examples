@@ -28,6 +28,7 @@
     <module>stock</module>
     <module>starter</module>
     <module>javaee-starter</module>
+    <module>reactivex-api</module>
   </modules>
 
   <dependencies>
