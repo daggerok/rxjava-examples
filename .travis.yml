@@ -24,8 +24,8 @@ before_script:
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 
 script:
-- ./mvnw
-- ./gradlew
+- ./mvnw >/dev/null
+- ./gradlew >/dev/null
 
 - |
   for project in \
