@@ -7,8 +7,12 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.daggerok</groupId>
-  <version>0.0.1</version>
+  <parent>
+    <groupId>com.github.daggerok</groupId>
+    <artifactId>rxjava-examples</artifactId>
+    <version>0.0.2</version>
+  </parent>
+
   <artifactId>reactivex-api</artifactId>
   <packaging>jar</packaging>
 
