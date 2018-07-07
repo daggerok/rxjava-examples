@@ -554,7 +554,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.0.2,</span>
-<span id="revdate">2018-07-07 21:25:25 UTC</span>
+<span id="revdate">2018-07-07 21:26:56 UTC</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -648,12 +648,24 @@ fun main(args: Array&lt;String&gt;) {
 <div class="listingblock">
 <div class="title">build</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">ObservableTest
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Slf4j</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">App</span> {
+  <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> main(<span class="predefined-type">String</span><span class="type">[]</span> args) {
+    Flowable.just(<span class="string"><span class="delimiter">&quot;</span><span class="content">ololo</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">trololo</span><span class="delimiter">&quot;</span></span>)
+            .subscribe(log::info);
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">api</div>
+<div class="content">
+<pre>ObservableTest
 ObserversTest
 OperationsTest
 ScheduleTest
 SingleTest
-SubjectTest</code></pre>
+SubjectTest</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -723,7 +735,7 @@ SubjectTest</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.2<br>
-Last updated 2018-07-07 21:25:25 UTC
+Last updated 2018-07-07 21:26:56 UTC
 </div>
 </div>
 </body>
