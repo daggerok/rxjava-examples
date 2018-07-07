@@ -1,12 +1,7 @@
-= reactivex-api
-
-////
-image:https://travis-ci.org/daggerok/reactivex-api.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/reactivex-api"]
-image:https://gitlab.com/daggerok/reactivex-api/badges/master/build.svg["Build Status", link="https://gitlab.com/daggerok/reactivex-api/-/jobs"]
-image:https://img.shields.io/bitbucket/pipelines/daggerok/reactivex-api.svg["Build Status", link="https://bitbucket.com/daggerok/reactivex-api"]
-////
 
 //tag::content[]
+
+=== reactivex-api
 
 //Read link:https://daggerok.github.io/reactivex-api[project reference documentation]
 

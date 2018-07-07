@@ -33,6 +33,7 @@ include::../README.adoc[tags=content]
 
 == Implementation
 
+include::../reactivex-api/README.adoc[tags=content]
 include::../javaee-starter/README.adoc[tags=content]
 include::../starter/README.adoc[tags=content]
 include::../stock/README.adoc[tags=content]
