@@ -44,7 +44,7 @@ script:
 - ./mvnw -pl javaee-starter com.dkanejs.maven.plugins:docker-compose-maven-plugin:1.0.1:down
 
 - ./gradlew clean build :javaee-starter:composeUp
-- sleep 2
+- sleep 30
 - http :8080/javaee-starter/
 - ./gradlew :javaee-starter:composeDown
 

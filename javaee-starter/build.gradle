@@ -15,7 +15,7 @@ dependencies {
 
 dockerCompose {
   useComposeFiles = [project.file("docker-compose-gradle.yaml")]
-  captureContainersOutput = true
+  captureContainersOutput = false
   stopContainers = true
   removeContainers = true
   removeImages = "Local"

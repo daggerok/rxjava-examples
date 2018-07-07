@@ -33,21 +33,7 @@
       <artifactId>rxkotlin</artifactId>
       <version>2.2.0</version>
     </dependency>
-    <!--
-    <dependency>
-      <groupId>io.vavr</groupId>
-      <artifactId>vavr</artifactId>
-      <version>${vavr.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
-      <optional>true</optional>
-      <scope>provided</scope>
-    </dependency>
-    -->
-    <!-- logging -->
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -59,7 +45,6 @@
       <version>1.2.3</version>
     </dependency>
 
-    <!-- Kotlin -->
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -70,19 +55,6 @@
       <artifactId>kotlin-reflect</artifactId>
       <version>${kotlin.version}</version>
     </dependency>
-    <!--
-    <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
-      <artifactId>jackson-module-kotlin</artifactId>
-      <version>${jakson-kotlin.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-test</artifactId>
-      <version>${kotlin.version}</version>
-      <scope>test</scope>
-    </dependency>
-    -->
 
     <!-- junit 4 -->
     <dependency>
@@ -152,7 +124,6 @@
   <build>
     <defaultGoal>clean package</defaultGoal>
 
-    <!-- kotlin -->
     <plugins>
       <plugin>
         <artifactId>kotlin-maven-plugin</artifactId>
@@ -161,13 +132,11 @@
         <configuration>
           <jvmTarget>${maven.compiler.target}</jvmTarget>
           <compilerPlugins>
-            <!-- Or "spring" for the Spring support -->
             <plugin>all-open</plugin>
             <plugin>no-arg</plugin>
             <plugin>spring</plugin>
           </compilerPlugins>
           <pluginOptions>
-            <!-- Each annotation is placed on its own line -->
             <option>all-open:annotation=javax.persistence.Entity</option>
             <option>no-arg:annotation=javax.persistence.Entity</option>
           </pluginOptions>
@@ -217,12 +186,10 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.5.1</version>
         <executions>
-          <!-- Replacing default-compile as it is treated specially by maven -->
           <execution>
             <id>default-compile</id>
             <phase>none</phase>
           </execution>
-          <!-- Replacing default-testCompile as it is treated specially by maven -->
           <execution>
             <id>default-testCompile</id>
             <phase>none</phase>
@@ -244,7 +211,6 @@
         </executions>
       </plugin>
 
-      <!-- fat jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -272,7 +238,6 @@
         </executions>
       </plugin>
 
-      <!-- junit -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -294,22 +259,8 @@
             <version>${junit.jupiter.version}</version>
           </dependency>
         </dependencies>
-        <configuration>
-          <properties>
-            <!--
-            <includeTags>acceptance | !feature-a</includeTags>
-            <excludeTags>integration, regression</excludeTags>
-            <configurationParameters>
-              junit.jupiter.conditions.deactivate = *
-              junit.jupiter.extensions.autodetection.enabled = true
-              junit.jupiter.testinstance.lifecycle.default = per_class
-            </configurationParameters>
-            -->
-          </properties>
-        </configuration>
       </plugin>
 
-      <!-- jgiven: `mvn verify` -->
       <plugin>
         <groupId>com.tngtech.jgiven</groupId>
         <artifactId>jgiven-maven-plugin</artifactId>
@@ -438,18 +389,6 @@
                 </goals>
                 <configuration>
                   <backend>pdf</backend>
-                  <!--
-                    Since 1.5.0-alpha.9 PDF back-end can use 'rouge' as well as 'coderay'
-                    for source highlighting
-                  -->
-                  <!--
-                    Due to a known issue on windows, it is recommended to use 'coderay'
-                    until an new version of 'rouge' is released.
-
-                    see discussions: https://github.com/asciidoctor/asciidoctor-maven-examples/pull/58
-                                     https://github.com/asciidoctor/asciidoctorj-pdf/issues/3
-                                     https://github.com/jneen/rouge/issues/661
-                  -->
                   <sourceHighlighter>coderay</sourceHighlighter>
                 </configuration>
               </execution>
