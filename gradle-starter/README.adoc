@@ -1,0 +1,18 @@
+
+//tag::content[]
+
+=== gradle-starter
+
+[source,bash]
+----
+mkdir gradle-starter
+cd gradle-starter/
+gradle init --type java-application
+----
+
+[source,java]
+----
+include::./src/main/java/daggerok/App.java[]
+----
+
+//end::content[]

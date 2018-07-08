@@ -1,0 +1,29 @@
+buildscript {
+  ext {
+    rxjavaVersion = '2.1.16'
+    lombokVersion = '1.16.22'
+    slf4jVersion = '1.7.25'
+  }
+}
+
+plugins {
+  id 'java'
+  id 'application'
+  id 'io.franzbecker.gradle-lombok' version '1.14'
+  id 'com.github.johnrengelman.shadow' version '2.0.2'
+}
+
+lombok.version = project.lombokVersion
+
+mainClassName = 'daggerok.App'
+
+dependencies {
+  compile "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+  testCompile 'junit:junit:4.12'
+}
+
+repositories {
+  jcenter()
+}
+
+defaultTasks 'clean', 'build'

@@ -24,6 +24,9 @@ before_script:
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 
 script:
+- ./gradlew -b ./gradle-starter/build.gradle
+- java -jar ./gradle-starter/build/libs/gradle-starter-all.jar ololololo tro-lolololololo
+
 - ./mvnw >/dev/null
 - ./gradlew >/dev/null
 
