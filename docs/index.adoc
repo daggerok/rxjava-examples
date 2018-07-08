@@ -33,6 +33,7 @@ include::../README.adoc[tags=content]
 
 == Implementation
 
+include::../spring-akka-gradle/README.adoc[tags=content]
 include::../gradle-starter/README.adoc[tags=content]
 include::../rxkotlin-example/README.adoc[tags=content]
 include::../reactivex-api/README.adoc[tags=content]

@@ -18,8 +18,8 @@ lombok.version = project.lombokVersion
 mainClassName = 'daggerok.App'
 
 dependencies {
-  compile "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
-  testCompile 'junit:junit:4.12'
+  implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+  testImplementation 'junit:junit:4.12'
 }
 
 repositories {

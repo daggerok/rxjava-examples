@@ -1,0 +1,64 @@
+buildscript {
+  ext {
+    akkaVersion = '2.5.13'
+    rxjavaVersion = '2.1.16'
+    lombokVersion = '1.16.22'
+    springBootVersion = '2.0.3.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+plugins {
+  id 'java'
+  id 'idea'
+  id 'eclipse'
+  id 'io.franzbecker.gradle-lombok' version '1.14'
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+version = '0.0.1'
+group = 'com.github.daggerok'
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
+defaultTasks 'clean', 'build'
+
+lombok {
+  version = project.lombokVersion
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation("io.reactivex.rxjava2:rxjava:$rxjavaVersion")
+  implementation("com.typesafe.akka:akka-actor_2.12:$akkaVersion")
+  implementation('org.springframework.boot:spring-boot-starter-webflux')
+  testImplementation('org.springframework.boot:spring-boot-starter-test')
+  testImplementation('io.projectreactor:reactor-test')
+}
+
+bootJar {
+  launchScript()
+}
+
+idea {
+  module {
+    downloadJavadoc = false
+    downloadSources = true
+  }
+}
+
+eclipse {
+  classpath {
+    downloadJavadoc = false
+    downloadSources = true
+  }
+}

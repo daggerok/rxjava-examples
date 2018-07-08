@@ -1,0 +1,28 @@
+
+//tag::content[]
+
+=== gradle-starter
+
+[source,bash]
+----
+cd spring-akka-gradle/
+./gradlew
+bash build/libs/*.jar
+----
+
+[source,java]
+----
+include::./src/main/java/com/github/daggerok/app/actors/PrinterActor.java[tags=content]
+----
+
+[source,java]
+----
+include::./src/main/java/com/github/daggerok/app/actors/GreetingActor.java[tags=content]
+----
+
+[source,java]
+----
+include::./src/main/java/com/github/daggerok/app/AkkaConfig.java[tags=content]
+----
+
+//end::content[]
