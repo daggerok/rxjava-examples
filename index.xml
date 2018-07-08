@@ -4,7 +4,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>rxjava-examples (0.0.2)</title>
-<date>2018-07-08 11:57:43 UTC</date>
+<date>2018-07-08 13:11:57 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -16,7 +16,7 @@
 <revhistory>
 <revision>
 <revnumber>0.0.2</revnumber>
-<date>2018-07-08 11:57:43 UTC</date>
+<date>2018-07-08 13:11:57 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -57,6 +57,84 @@
 <chapter xml:id="implementation">
 <title>Implementation</title>
 <section xml:id="gradle-starter">
+<title>gradle-starter</title>
+<programlisting language="bash" linenumbering="unnumbered">cd spring-akka-gradle/
+./gradlew
+bash build/libs/*.jar</programlisting>
+<programlisting language="java" linenumbering="unnumbered">@Slf4j
+public class PrinterActor extends AbstractActorWithTimers {
+
+  @Getter
+  @RequiredArgsConstructor
+  public static class EchoMessage {
+    final String message;
+  }
+
+  @Override
+  public Receive createReceive() {
+    return receiveBuilder()
+        .match(EchoMessage.class, echoMessage -&gt; {
+          final String message = echoMessage.message;
+          System.out.println("message = " + message);
+          log.info("received message: {}", message);
+          this.getContext().getSystem().log().info("received: {}", message);
+        })
+        .build()
+        ;
+  }
+}</programlisting>
+<programlisting language="java" linenumbering="unnumbered">@RequiredArgsConstructor
+public class GreetingActor extends AbstractActorWithTimers {
+
+  final ActorRef printerActor;
+
+  @Getter
+  @RequiredArgsConstructor
+  public static class EchoMessage {
+    final String message;
+  }
+
+  @Override
+  public Receive createReceive() {
+    return receiveBuilder()
+        .match(Object.class, anyObject -&gt; {
+          System.out.println("sending message..");
+          getContext().getSystem().log().info("O.oOooOOOoOO__");
+          printerActor.tell(new EchoMessage("olololo!"), self());
+        })
+        .build()
+        ;
+  }
+}</programlisting>
+<programlisting language="java" linenumbering="unnumbered">@Slf4j
+@Configuration
+public class AkkaConfig {
+
+  @Bean
+  public ActorSystem actorSystem() {
+    return ActorSystem.create("spring-akka-gradle-system");
+  }
+
+  @Bean
+  public ActorRef printerActor(final ActorSystem actorSystem) {
+    return actorSystem.actorOf(Props.create(PrinterActor.class), "PrinterActor");
+  }
+
+  @Bean
+  public ActorRef greetingActor(final ActorSystem actorSystem, ActorRef printerActor) {
+    return actorSystem .actorOf(Props.create(GreetingActor.class, printerActor), "GreetingActor");
+  }
+
+  @Bean
+  public ApplicationRunner actorsApp(final ActorRef greetingActor) {
+    return args -&gt; {
+      actorSystem().log().info("just greeting...");
+      greetingActor.tell(new PrinterActor.EchoMessage("ololo!"), ActorRef.noSender());
+    };
+  }
+}</programlisting>
+</section>
+<section xml:id="gradle-starter-2">
 <title>gradle-starter</title>
 <programlisting language="bash" linenumbering="unnumbered">mkdir gradle-starter
 cd gradle-starter/

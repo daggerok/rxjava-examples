@@ -554,7 +554,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.0.2,</span>
-<span id="revdate">2018-07-08 11:57:43 UTC</span>
+<span id="revdate">2018-07-08 13:11:57 UTC</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -563,10 +563,11 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#implementation">2. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#gradle-starter">2.1. gradle-starter</a></li>
-<li><a href="#reactivex-api">2.2. reactivex-api</a></li>
-<li><a href="#javaee-starter">2.3. javaee-starter</a></li>
-<li><a href="#starter">2.4. starter</a></li>
-<li><a href="#stock">2.5. stock</a></li>
+<li><a href="#gradle-starter-2">2.2. gradle-starter</a></li>
+<li><a href="#reactivex-api">2.3. reactivex-api</a></li>
+<li><a href="#javaee-starter">2.4. javaee-starter</a></li>
+<li><a href="#starter">2.5. starter</a></li>
+<li><a href="#stock">2.6. stock</a></li>
 </ul>
 </li>
 <li><a href="#links">3. Links</a></li>
@@ -624,6 +625,100 @@ table.CodeRay td.code>pre{padding:0}
 <h3 id="gradle-starter"><a class="anchor" href="#gradle-starter"></a>2.1. gradle-starter</h3>
 <div class="listingblock">
 <div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">cd spring-akka-gradle/
+./gradlew
+bash build/libs/*.jar</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Slf4j</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">PrinterActor</span> <span class="directive">extends</span> AbstractActorWithTimers {
+
+  <span class="annotation">@Getter</span>
+  <span class="annotation">@RequiredArgsConstructor</span>
+  <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">EchoMessage</span> {
+    <span class="directive">final</span> <span class="predefined-type">String</span> message;
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> Receive createReceive() {
+    <span class="keyword">return</span> receiveBuilder()
+        .match(EchoMessage.class, echoMessage -&gt; {
+          <span class="directive">final</span> <span class="predefined-type">String</span> message = echoMessage.message;
+          <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">message = </span><span class="delimiter">&quot;</span></span> + message);
+          log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">received message: {}</span><span class="delimiter">&quot;</span></span>, message);
+          <span class="local-variable">this</span>.getContext().getSystem().log().info(<span class="string"><span class="delimiter">&quot;</span><span class="content">received: {}</span><span class="delimiter">&quot;</span></span>, message);
+        })
+        .build()
+        ;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RequiredArgsConstructor</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">GreetingActor</span> <span class="directive">extends</span> AbstractActorWithTimers {
+
+  <span class="directive">final</span> ActorRef printerActor;
+
+  <span class="annotation">@Getter</span>
+  <span class="annotation">@RequiredArgsConstructor</span>
+  <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">EchoMessage</span> {
+    <span class="directive">final</span> <span class="predefined-type">String</span> message;
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> Receive createReceive() {
+    <span class="keyword">return</span> receiveBuilder()
+        .match(<span class="predefined-type">Object</span>.class, anyObject -&gt; {
+          <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">sending message..</span><span class="delimiter">&quot;</span></span>);
+          getContext().getSystem().log().info(<span class="string"><span class="delimiter">&quot;</span><span class="content">O.oOooOOOoOO__</span><span class="delimiter">&quot;</span></span>);
+          printerActor.tell(<span class="keyword">new</span> EchoMessage(<span class="string"><span class="delimiter">&quot;</span><span class="content">olololo!</span><span class="delimiter">&quot;</span></span>), self());
+        })
+        .build()
+        ;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Slf4j</span>
+<span class="annotation">@Configuration</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AkkaConfig</span> {
+
+  <span class="annotation">@Bean</span>
+  <span class="directive">public</span> ActorSystem actorSystem() {
+    <span class="keyword">return</span> ActorSystem.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">spring-akka-gradle-system</span><span class="delimiter">&quot;</span></span>);
+  }
+
+  <span class="annotation">@Bean</span>
+  <span class="directive">public</span> ActorRef printerActor(<span class="directive">final</span> ActorSystem actorSystem) {
+    <span class="keyword">return</span> actorSystem.actorOf(Props.create(PrinterActor.class), <span class="string"><span class="delimiter">&quot;</span><span class="content">PrinterActor</span><span class="delimiter">&quot;</span></span>);
+  }
+
+  <span class="annotation">@Bean</span>
+  <span class="directive">public</span> ActorRef greetingActor(<span class="directive">final</span> ActorSystem actorSystem, ActorRef printerActor) {
+    <span class="keyword">return</span> actorSystem .actorOf(Props.create(GreetingActor.class, printerActor), <span class="string"><span class="delimiter">&quot;</span><span class="content">GreetingActor</span><span class="delimiter">&quot;</span></span>);
+  }
+
+  <span class="annotation">@Bean</span>
+  <span class="directive">public</span> ApplicationRunner actorsApp(<span class="directive">final</span> ActorRef greetingActor) {
+    <span class="keyword">return</span> args -&gt; {
+      actorSystem().log().info(<span class="string"><span class="delimiter">&quot;</span><span class="content">just greeting...</span><span class="delimiter">&quot;</span></span>);
+      greetingActor.tell(<span class="keyword">new</span> PrinterActor.EchoMessage(<span class="string"><span class="delimiter">&quot;</span><span class="content">ololo!</span><span class="delimiter">&quot;</span></span>), ActorRef.noSender());
+    };
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gradle-starter-2"><a class="anchor" href="#gradle-starter-2"></a>2.2. gradle-starter</h3>
+<div class="listingblock">
+<div class="content">
 <pre class="CodeRay highlight"><code data-lang="bash">mkdir gradle-starter
 cd gradle-starter/
 gradle init --type java-application</code></pre>
@@ -669,7 +764,7 @@ fun main(args: Array&lt;String&gt;) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="reactivex-api"><a class="anchor" href="#reactivex-api"></a>2.2. reactivex-api</h3>
+<h3 id="reactivex-api"><a class="anchor" href="#reactivex-api"></a>2.3. reactivex-api</h3>
 <div class="listingblock">
 <div class="title">build</div>
 <div class="content">
@@ -702,7 +797,7 @@ Subject</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="javaee-starter"><a class="anchor" href="#javaee-starter"></a>2.3. javaee-starter</h3>
+<h3 id="javaee-starter"><a class="anchor" href="#javaee-starter"></a>2.4. javaee-starter</h3>
 <div class="listingblock">
 <div class="title">build</div>
 <div class="content">
@@ -715,7 +810,7 @@ Subject</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="starter"><a class="anchor" href="#starter"></a>2.4. starter</h3>
+<h3 id="starter"><a class="anchor" href="#starter"></a>2.5. starter</h3>
 <div class="listingblock">
 <div class="title">build</div>
 <div class="content">
@@ -728,7 +823,7 @@ Subject</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="stock"><a class="anchor" href="#stock"></a>2.5. stock</h3>
+<h3 id="stock"><a class="anchor" href="#stock"></a>2.6. stock</h3>
 <div class="listingblock">
 <div class="title">build</div>
 <div class="content">
@@ -764,7 +859,7 @@ Subject</pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.2<br>
-Last updated 2018-07-08 11:57:43 UTC
+Last updated 2018-07-08 13:11:57 UTC
 </div>
 </div>
 </body>
